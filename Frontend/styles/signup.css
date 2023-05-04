@@ -1,0 +1,84 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+#form{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 0px 20px 50px 20px;
+    align-items: center;
+    width: 400px;
+    /* position: fixed; */
+    
+    margin: auto;
+    
+}
+.auth{
+    padding-left: 25px;
+    width: 25px;
+    margin: 0px 20px;
+}
+input{
+    font-size: 15px;
+    display: block;
+    margin: auto;
+    width: 280px;
+    border: 2px solid black;
+    border-radius: 2px;
+    outline: none;
+    padding: 7px;
+}
+button{
+    display: block;
+    margin: auto;
+    width: 300px;
+    padding: 7px;
+    font-size: 16px;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    font-weight: 500;
+    background-color: rgb(98, 10, 98);
+}
+button:hover{
+    background-color: rgb(123, 14, 123);
+    cursor: pointer;
+}
+.a{
+    padding: 5px 0px;
+    cursor: pointer;
+    margin-top: 20px;
+    display: flex;
+    border: 2px solid rgb(26, 26, 26);
+    border-radius: 2px;
+    width:300px;
+    margin: auto;
+    align-items: center;
+    
+}
+.a a{
+    color: black;
+    text-decoration: none;
+}
+.a:hover{
+    color: rgb(9, 118, 169);
+    border: 2px solid rgb(9, 118, 169);
+}
+h1,h2,h3,h4,h5,h6,p{
+    text-align: center;
+}
+#crop img{
+    width: 70px;
+    height: 140px;
+    object-fit: cover;
+    
+}
+#main{
+    display: flex;
+    width: 150px;
+    height: 100px;
+    margin: auto;
+    align-items: center;
+}
+#crop #logo{
+    height: 120px;
+}
