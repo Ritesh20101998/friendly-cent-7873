@@ -1,15 +1,17 @@
 let express=require("express");
 const passport=require("./google_oauth")
 const path = require('path');
+const { userRouter } = require("../route/user_route");
 
 let app=express();
 // let cors=require("cors");
 // app.use(cors)
-
+app.use("/user",userRouter)
 app.get("/",(req,res)=>{
     const parentDir = path.resolve(__dirname, '..');
     res.sendFile(parentDir+"\\Frontend\\signup.html")
 })
+
 
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile'] }));
