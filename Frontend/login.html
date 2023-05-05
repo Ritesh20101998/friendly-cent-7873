@@ -14,42 +14,33 @@
             <div id="crop"><img id="logo" src="../Images/Chatify logo.jpg" alt=""></div>
             <div><h2>Chatify</h2></div>
         </div>
-        <h1>Join On Chatify</h1>
-        <p>Create your account by adding credentials</p>
+        <h1>First, enter your email</h1>
+        <p>We suggest using the email address you use at work.</p>
         <br>
-            <label style="margin-left: 50px;font-size: 18px;" for="">Name :</label>
-            <br>
             <div class="a">
-                <input style="outline: none;border: none;" type="text" id="name" placeholder="Enter your name">
+                <img class="auth" src="../Images/icons8-google-48.png" alt="">
+                <a href=""><h4 id="GoogleAuth">Continue with Google</h4></a>
             </div>
             <br>
-
-            <label style="margin-left: 50px;font-size: 18px;" for="">Email :</label>
-            <br>
             <div class="a">
-                <input style="outline: none;border: none;" type="text" id="email" placeholder="Enter your Email">
+                <img class="auth" src="../Images/icons8-github-48.png" alt="">
+                <a href="https://github.com/login/oauth/authorize?client_id=788dc52d02b18f43337b"><h4>Continue with Github</h4></a>
             </div>
             <br>
-            <label style="margin-left: 50px;font-size: 18px;" for="">Mobile No :</label>
             <br>
-            <div class="a">
-                <input style="outline: none;border: none;" type="text" id="mobile" placeholder="Enter your Mobile No.">
-            </div>
-            <br>
-            <label style="margin-left: 50px;font-size: 18px;" for="">Password :</label>
-            <br>
-            <div class="a">
-                <input style="outline: none;border: none;" type="text" id="password" placeholder="Create password">
-            </div>
-            
+            <h5>OR</h5>
             <br><br>
-            <button id="register">Register</button>
+            <input type="text" id="email" placeholder="Enter your email">
+            <br>
+            <input type="text" id="password" placeholder="Enter your password">
+            <br>
+            <a id="continue"><button>Continue</button></a>
             
     </div>
     <br><br>
 <p>Already using chatify?</p>
 <br>
-<a href="./signup.html"><p style="color: rgb(9, 118, 169);">Login</p>
+<a href="./signup.html"><p style="color: rgb(9, 118, 169);">Create Account</p>
 </a></body>
 <script src="./scripts/login.js"></script>
 </html>

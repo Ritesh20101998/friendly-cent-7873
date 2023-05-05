@@ -1,28 +1,36 @@
 let express=require("express");
-const passport=require("./google_oauth")
-const path = require('path');
-const { userRouter } = require("../route/user_route");
-
+const { connection } = require("../register_login/db");
 let app=express();
-// let cors=require("cors");
-// app.use(cors)
+app.use(express.json());
+const { userRouter } = require("../register_login/route/user_route");
+const cors=require("cors")
+app.use(cors())
+let cookie_parser=require("cookie-parser");
+app.use(cookie_parser());
+
 app.use("/user",userRouter)
+
 app.get("/",(req,res)=>{
-    const parentDir = path.resolve(__dirname, '..');
-    res.sendFile(parentDir+"\\Frontend\\signup.html")
+    res.sendFile('http://127.0.0.1:5500/Frontend/login.html')
 })
 
 
-app.get('/auth/google',
-  passport.authenticate('google', { scope: ['profile'] }));
+// app.get('/auth/google',
+//   passport.authenticate('google', { scope: ['profile'] }));
 
-app.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
+// app.get('/auth/google/callback', 
+//   passport.authenticate('google', { failureRedirect: '/login' }),
+//   function(req, res) {
+//     // Successful authentication, redirect home.
+//     res.redirect('/');
+//   });
 
-  app.listen(8090,()=>{
+  app.listen(8090,async()=>{
+    try {
+      await connection
+      console.log("Connected to DB");
+    } catch (error) {
+      console.log(error);
+    }
     console.log("Server is running");
   })
