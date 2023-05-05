@@ -4,7 +4,7 @@ let userSchema=mongoose.Schema({
     name:String,
     email:{type:String,required:true,unique:true},
     mobile:{type:Number,required:true},
-    password:{type:String}
+    password:{type:String,required:true}
 })
 
 let UserModel=mongoose.model("user",userSchema);

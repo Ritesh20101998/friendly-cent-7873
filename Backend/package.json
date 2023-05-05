@@ -11,10 +11,18 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
+<<<<<<< HEAD
+    "cookie-parser": "^1.4.6",
+=======
+    "cors": "^2.8.5",
+>>>>>>> 7c6f8f4d8b1e7fa3d38a6f88d05bba097764ba27
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "ioredis": "^5.3.2",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.1.0",
-    "passport-google-oauth20": "^2.0.0"
+    "nodemon": "^2.0.22",
+    "passport-google-oauth20": "^2.0.0",
+    "redis": "^4.6.6"
   }
 }

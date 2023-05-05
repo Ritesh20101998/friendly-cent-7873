@@ -1,14 +1,33 @@
-const ClientID="788dc52d02b18f43337b"
-const Client_Secret="d1edd27cd11e2c1516b68b9e9bb23dd5f1889bd7"
-
-let GoogleAuth=document.getElementById("GoogleAuth");
-GoogleAuth.addEventListener("click",(e)=>{
-    e.preventDefault();
-    
-    fetch('http://localhost:8090/auth/google/callback')
-  .then(response => {
-    // handle the response from the backend
-  })
-  
-    
+let register=document.getElementById("register");
+let names=document.getElementById("name")
+let email=document.getElementById("email")
+let mobile=document.getElementById("mobile")
+let password=document.getElementById("password")
+register.addEventListener("click",()=>{
+    registerUser();
 })
+
+function registerUser(){
+    console.log("Working properly");
+					let obj={
+						name:names.value,
+						email:email.value,
+						mobile:mobile.value,
+						password:password.value
+					}
+
+					fetch("http://localhost:8090/user/register",{
+						method:"POST",
+						headers:{
+							"Content-type":"application/json"
+						},
+						body:JSON.stringify(obj)
+					})
+					.then((res)=>res.json())
+					.then((res)=>{
+						if(res){
+							alert(res.msg);
+						}
+					})
+					.catch((err) => console.log(err));
+}
