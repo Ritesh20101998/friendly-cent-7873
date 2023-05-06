@@ -1,0 +1,98 @@
+body{
+    margin: 0px;
+}
+
+
+#top{
+    width: 100%;
+    height: 50px;
+    background-color:#350d36;
+}
+
+#main-content{
+    height: 100vh;
+    border: 1px solid black;
+    display: flex;
+}
+#left-content{
+    width: 30%;
+    background-color:#3f0e40;
+}
+
+#right-content{
+    padding: 50px;
+}
+#company-heading{
+    font-size: 40px;
+}
+#details{
+    font-size: 20px;
+}
+input[type="text"]{
+    font-size: 20px;
+    margin-top: 30px;
+    width: 80%;
+    padding: 10px;
+    border: 1px solid blueviolet;
+    border-radius: 10px;
+}
+
+#next{
+    font-size: 27px;
+    background-color: #dddddd;
+    color: rgba(0, 0, 0, 0.527);
+    padding: 5px 60px;
+    margin-top: 50px;
+    border-radius: 8px;
+    border: none;
+}
+#next:hover{
+    cursor: pointer;
+    background-color: rgb(74,21,75);
+    color: wheat;
+}
+
+#company-name{
+    background-color: rgba(0, 0, 0, 0.719);
+    margin: 0px;
+    color: white;
+  
+}
+
+#select-workspace{
+    text-align: center;
+    /* border: 1px solid red; */
+    margin-top: 50px;
+}
+label[for="batch"]{
+    font-size: 25px;
+    color: white;
+}
+
+#slack {
+    width: 80%;
+    height: 35px;
+    margin-top: 30px;
+    font-size: large;
+}
+
+#join-button{
+    width: 80px;
+}
+
+#join-button:hover{
+    cursor: pointer;
+}
+@media screen and (max-width: 870px){
+    #left-content{
+        display: none;
+    }
+}
+
+
+
+@media screen and (max-width: 600px){
+    #left-content{
+        display: none;
+    }
+}
