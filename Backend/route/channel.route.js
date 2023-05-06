@@ -1,5 +1,5 @@
 const express = require("express")
-const { ChannelMod } = require("./channelmodel")
+const { ChannelMod } = require("../model/channelmodel")
 const channle_router = express.Router()
 
 channle_router.get("/channelData", async (req, res) => {

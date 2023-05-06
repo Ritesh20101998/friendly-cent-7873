@@ -3,7 +3,7 @@ const cors = require("cors")
 const connection = require("./db")
 // const {userRouter} = require("./routes/user.route")
 // const auth = require("./middlewares/auth.middleware")
-const {channle_router}=require("./channel.route")
+const {channle_router}=require("./route/channel.route")
 // const cookieParser = require("cookie-parser")
 
 require("dotenv").config()
