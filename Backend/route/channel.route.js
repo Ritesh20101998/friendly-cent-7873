@@ -7,6 +7,8 @@ channle_router.get("/channelData", async (req, res) => {
         const users = await ChannelMod.find()
         console.log("user register succesfully")
         res.send(users)
+        console.log(users.Channel)
+        
     } catch (error) {
         res.send(error)
     }
@@ -17,6 +19,7 @@ channle_router.post("/addChannel", async (req, res) => {
     try {
         let chnl = new ChannelMod(payload)
         await chnl.save()
+        console.log(chnl)
         res.send("Channel has been added")
     } catch (error) {
         res.send({ "error": "something went wrong" })
