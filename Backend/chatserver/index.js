@@ -5,20 +5,16 @@ const http = require("http")
 const { ChatModel } = require("./model/chat.model")
 const cors = require('cors')
 const moment = require("moment")
-
+const {connection}=require("./config/db")
 const websocket = require("websockets")
-const formateMessage=require("./middleware/message")
+const formateMessage = require("./middleware/message")
 
 const app=express()
 app.use(express.json())
-app.use(cors({origin:"*"}))
-const {connection}=require("./config/db")
 
 const server = http.createServer(app)
 require("dotenv").config()
 
-
-const formateMessage = require("./middleware/message")
 const { time } = require("console")
 
 
@@ -48,20 +44,20 @@ io.on("connection", (socket) => {
 
     socket.on("user_channel", ({ username, channel }) => {
 
-        socket.join(channel)
+        socket.join(chat)
         socket.emit("welcome", formateMessage(botename, "Welcome to Chatify"))
 
         //Broadcast to other channel
-        socket.broadcast.to(channel).emit("message_all", formateMessage(botename, `${username} has join the chat`))
+        socket.broadcast.to(chat).emit("message_all", formateMessage(botename, `${username} has join the chat`))
 
         socket.on("chatMessage", async (text) => {
-            io.to(channel).emit("message_all", formateMessage(username, text))
+            io.to(chat).emit("message_all", formateMessage(username, text))
 
         })
 
         socket.on("disconnect", () => {
 
-            io.to(channel).emit("message_all", formateMessage(botename, `${username} has left the chat`))
+            io.to(chat).emit("message_all", formateMessage(botename, `${username} has left the chat`))
 
         })
     })
@@ -78,19 +74,19 @@ io.on("connection", (socket) => {
         socket.broadcast.to(channel).emit("message_all", formateMessage(botename, `${username} has join the chat`))
 
         socket.on("chatMessage", async (text) => {
-            io.to(channel).emit("message_all", formateMessage(username, text))
+            io.to(chat).emit("message_all", formateMessage(username, text))
 
         })
 
         socket.on("disconnect", () => {
 
-            io.to(channel).emit("message_all", formateMessage(botename, `${username} has left the chat`))
+            io.to(chat).emit("message_all", formateMessage(botename, `${username} has left the chat`))
 
         })
     })
 })
 
-const PORT = 8081;
+const PORT = 8190;
 server.listen(PORT, async () => {
     console.log(`server running on port ${PORT}`);
 })
