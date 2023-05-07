@@ -1,25 +1,26 @@
 const express= require("express")
-const app=express()
 const socketio = require("socket.io")
 const http = require("http")
 const {ChatModel}=require("./model/chat.model")
 const cors = require('cors')
 const moment = require("moment")
+const websocket = require("websockets")
 const formateMessage=require("./middleware/message")
-app.use(cors({origin:"*"}))
-const server = http.createServer(app)
 
-
-
+const app=express()
 app.use(express.json())
+app.use(cors({origin:"*"}))
 const {connection}=require("./config/db")
+
+const server = http.createServer(app)
 require("dotenv").config()
+const io = socketio(server)
 
 app.get("/", (req, res) => {
-    res.send("WELCOME");
+    res.send("WELCOME TO CHATIFY\nWE BUILD THE COMMUNITY");
 })
 
-app.get("/channel", async (req, res) => {
+app.get("/chat", async (req, res) => {
     let query = req.query;
     try {
         let data = await ChatModel.find(query)
@@ -30,7 +31,30 @@ app.get("/channel", async (req, res) => {
     }
 })
 
-const botename = "We Connect"
+const botename = "Chatify"
+
+io.on("connection", (socket) => {
+
+    socket.on("user_channel", ({ username, channel }) => {
+
+        socket.join(channel)
+        socket.emit("welcome", formateMessage(botename, "Welcome to Chatify"))
+
+        //Broadcast to other channel
+        socket.broadcast.to(channel).emit("message_all", formateMessage(botename, `${username} has join the chat`))
+
+        socket.on("chatMessage", async (text) => {
+            io.to(channel).emit("message_all", formateMessage(username, text))
+
+        })
+
+        socket.on("disconnect", () => {
+
+            io.to(channel).emit("message_all", formateMessage(botename, `${username} has left the chat`))
+
+        })
+    })
+})
 
 app.listen(process.env.port,async()=>{
     try {
