@@ -22,7 +22,7 @@
     ></script>
     <!-- socket cdn link -->
     <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
-    <script src="./main.js" defer></script>
+    <!-- <script src="./main.js" defer></script> -->
 
     <!-- for alert message -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -157,7 +157,8 @@
                 <i class="fas fa-plus"></i>
               </span>
               <!-- <span id="addChannelIconText">Add Channel</span> -->
-              <a href="./channel.html"><span id="addChannelIconText">Add Channel</span></a>
+              <a href="./channel.html"><span id="addChannelIconText">Add Channel</span><h4 id="chnlname"></h4></a>
+              
 
               <!-- Open Channel Modal -->
               <div id="myModal" class="modal">
@@ -264,6 +265,39 @@
       </section>
     </main>
   </body>
+  <script>
+
+    const API = "http://localhost:8090/channel/channelData"
+    let channelname=document.getElementById("chnlname")
+
+    fetch(API)
+    .then((request)=>{
+      return request.json()
+    })
+    .then((data)=>{
+      
+      console.log(data)
+      Display(data)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+
+
+    function Display(data){
+      data.forEach((element) => {
+        let channel = document.createElement("div")
+
+        let Channel= document.createElement("h4");
+        Channel.innerText=element.Channel
+
+        channel.append(Channel)
+        channelname.append(channel)
+        
+      });
+
+    }
+  </script>
 </html>
 
 <!-- <div class="message">

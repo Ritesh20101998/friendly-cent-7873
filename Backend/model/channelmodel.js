@@ -1,6 +1,6 @@
 const mongoose=require("mongoose");
 const channelSchema=mongoose.Schema({
-    Channel:String,
+    Channel:{type:String,required:true},
 },{
     versionKey:false
 })
