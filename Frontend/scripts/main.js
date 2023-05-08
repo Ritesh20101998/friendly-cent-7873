@@ -69,7 +69,7 @@ const socket = io("https://chatapp-gyhd.onrender.com/",{transports:["websocket"]
 
 window.addEventListener("load",async ()=>{
   
-  let user_fetch = await fetch(`https://nice-cyan-chiton-vest.cyclic.app/channel/data/${data._id}`, {
+  let user_fetch = await fetch(`https://wild-puce-yak.cyclic.app/channel/data/${data._id}`, {
     headers: { 'Content-Type': 'application/json' }
   })
 
