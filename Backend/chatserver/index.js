@@ -1,25 +1,32 @@
 const express= require("express")
-const app=express()
 const socketio = require("socket.io")
 const http = require("http")
-const {ChatModel}=require("./model/chat.model")
+//const {connection} = require("./config/db")
+const { ChatModel } = require("./model/chat.model")
 const cors = require('cors')
 const moment = require("moment")
-const formateMessage=require("./middleware/message")
-app.use(cors({origin:"*"}))
-const server = http.createServer(app)
-
-
-
-app.use(express.json())
 const {connection}=require("./config/db")
+const websocket = require("websockets")
+const formateMessage = require("./middleware/message")
+
+const app=express()
+app.use(express.json())
+
+const server = http.createServer(app)
 require("dotenv").config()
 
+const { time } = require("console")
+
+
+app.use(cors({origin:"*"}))
+
+const io = socketio(server)
+
 app.get("/", (req, res) => {
-    res.send("WELCOME");
+    res.send("WELCOME TO CHATIFY\nWE BUILD THE COMMUNITY");
 })
 
-app.get("/channel", async (req, res) => {
+app.get("/chat", async (req, res) => {
     let query = req.query;
     try {
         let data = await ChatModel.find(query)
@@ -30,14 +37,56 @@ app.get("/channel", async (req, res) => {
     }
 })
 
-const botename = "We Connect"
+const botename = "Chatify"
 
-app.listen(process.env.port,async()=>{
-    try {
-        await connection
-        console.log("Connected to db");
-    } catch (error) {
-        console.log(error);
-    }
-    console.log("Server is running");
+
+io.on("connection", (socket) => {
+
+    socket.on("user_channel", ({ username, channel }) => {
+
+        socket.join(chat)
+        socket.emit("welcome", formateMessage(botename, "Welcome to Chatify"))
+
+        //Broadcast to other channel
+        socket.broadcast.to(chat).emit("message_all", formateMessage(botename, `${username} has join the chat`))
+
+        socket.on("chatMessage", async (text) => {
+            io.to(chat).emit("message_all", formateMessage(username, text))
+
+        })
+
+        socket.on("disconnect", () => {
+
+            io.to(chat).emit("message_all", formateMessage(botename, `${username} has left the chat`))
+
+        })
+    })
+})
+
+io.on("connection", (socket) => {
+
+    socket.on("user_channel", ({ username, channel }) => {
+
+        socket.join(channel)
+        socket.emit("welcome", formateMessage(botename, "Welcome to we connect"))
+
+        //Broadcast to other channel
+        socket.broadcast.to(channel).emit("message_all", formateMessage(botename, `${username} has join the chat`))
+
+        socket.on("chatMessage", async (text) => {
+            io.to(chat).emit("message_all", formateMessage(username, text))
+
+        })
+
+        socket.on("disconnect", () => {
+
+            io.to(chat).emit("message_all", formateMessage(botename, `${username} has left the chat`))
+
+        })
+    })
+})
+
+const PORT = 8190;
+server.listen(PORT, async () => {
+    console.log(`server running on port ${PORT}`);
 })

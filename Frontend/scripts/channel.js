@@ -3,11 +3,12 @@ let Channelname=document.getElementById("channel-name")
 function createChannel(){
     console.log("Function working")
     let obj={
-        Channelname:Channelname.value,
+        Channel:Channelname.value
+	
         
     }
-    fetch("http://localhost:8100/channel/channelData",{
-						method:"GET",
+    fetch("http://localhost:8090/channel/addchannel",{
+						method:"POST",
 						headers:{
 							"Content-type":"application/json"
 						},
@@ -21,15 +22,16 @@ function createChannel(){
                     )
                     
 					.then((res)=>{
-                        
-                        
+						
 						if(res){
 							alert(res.msg);
                             
 						}
+						
                         // window.location.href = "../main.html"
                         
 					})
-					.catch((err) => console.log(err));
+					
+					.catch((err) => {console.log(err)});
 
 }

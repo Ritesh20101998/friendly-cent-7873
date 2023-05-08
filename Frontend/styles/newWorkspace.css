@@ -1,0 +1,134 @@
+
+
+
+/* 
+   .box {
+    width: 40%;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.2);
+    padding: 35px;
+    border: 2px solid #fff;
+    border-radius: 20px/50px;
+    background-clip: padding-box;
+    text-align: center;
+  }
+ 
+  .box img{
+    margin-top: 20%;
+    color:rgb(98, 10, 98) ;
+  }
+   
+  .button {
+    font-size: 1.5em;
+    padding: 10px;
+    color: black;
+    border: 2px solid rgb(98, 10, 98);
+    border-radius: 20px/50px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+  }
+ 
+  .button:hover {
+    color:whitesmoke;
+    background: rgb(98, 10, 98);
+  }
+   */
+   .overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgb(98, 10, 98);
+    transition: opacity 500ms;
+    /* visibility: hidden; */
+    /* opacity: 0; */
+  }
+  .overlay:target {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .new-chanel-popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: whitesmoke;
+    border-radius: 5px;
+    width: 500px;
+    position: relative;
+    /* transition: all 5s ease-in-out; */
+  }
+  
+  .new-chanel-popup h2 {
+    margin-top: 0;
+    color: #0a0a0a;
+    font-family: Tahoma, Arial, sans-serif;
+  }
+  .new-chanel-popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    /* transition: all 200ms; */
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #151313;
+  }
+  .new-chanel-popup .close:hover {
+    color: rgb(98, 10, 98);
+  }
+  .new-chanel-popup .channel-content {
+    
+    overflow: auto;
+  }
+  .chanel-head-name{
+  font-size: 20px;
+  margin-bottom: 5px;
+  }
+  #create{
+    width: 500px;
+    font-size: 30px;
+    border-radius: 5px;
+    border: none;
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+}
+
+#create:hover{
+    cursor: pointer;
+    background-color: rgb(98, 10, 98);
+    color: #fff;
+}
+#channel-name,#description{
+    width: 95%;
+    padding: 5px;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.channel-dis{
+    color: #0b0a0b;
+    font-size: 20px;
+}
+
+
+  @media screen and (max-width: 700px){
+    .box{
+      width: 70%;
+    }
+    .new-chanel-popup{
+        margin: 50px auto;
+       width: 50%;
+    }
+    #create{
+      width: 250px;
+      font-size: 15px;
+      border-radius: 5px;
+      border: none;
+      position: absolute;
+      bottom: 20px;
+      right: 30px;
+    }
+  } 
