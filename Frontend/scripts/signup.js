@@ -15,7 +15,7 @@ function registerUser(){
 						mobile:mobile.value,
 						password:password.value
 					}
-
+					// console.log(obj);
 					fetch("http://localhost:8090/user/register",{
 						method:"POST",
 						headers:{
@@ -25,6 +25,7 @@ function registerUser(){
 					})
 					.then((res)=>res.json())
 					.then((res)=>{
+						// console.log(res);
 						if(res){
 							alert(res.msg);
 						}
