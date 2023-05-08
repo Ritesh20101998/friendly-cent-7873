@@ -1,36 +1,116 @@
-let express=require("express");
-const { connection } = require("../register_login/db");
-let app=express();
-app.use(express.json());
-const { userRouter } = require("../register_login/route/user_route");
-const cors=require("cors")
-app.use(cors())
-let cookie_parser=require("cookie-parser");
-app.use(cookie_parser());
+const express = require("express")
+const {connection} = require("./db")
+require("dotenv").config() 
+// const {blogRouter} = require("./routes/blog.routes")
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+// const {auth} = require("./middleware/auth.middleware")
 
-app.use("/user",userRouter)
+const app = express()
 
-app.get("/",(req,res)=>{
-    res.sendFile('http://127.0.0.1:5500/Frontend/login.html')
-})
+app.use(express.json())
+
+// //////////// Git Hub O-Auth ////////////
+
+// app.get("/login", (req,res)=>{
+//     res.sendFile(__dirname + "/index.html")
+// })
+
+// app.get("/auth/github", async (req,res)=>{
+//     const {code} = req.query
+//     console.log(code)
+//     const accessToken = await fetch("https://github.com/login/oauth/access_token",{
+//         method : "POST",
+//         headers : {
+//             Accept : "application/json",
+//             "content-type": "application/json"
+//         },
+//         body :JSON.stringify({
+//             client_id : process.env.client_id,
+//             client_secret : process.env.client_secret,
+//             code
+//         })
+//     }).then((res)=> res.json())
+
+//     const user = await fetch("https://api.github.com/user", {
+//         headers : {
+//             Authorization : `Bearer ${accessToken.access_token}`
+//         }
+//     })
+//     .then((res)=> res.json())
+//     .catch((err)=> console.log(err))
+
+//     console.log(user)
+
+//     const useremailis = await fetch("https://api.github.com/user/emails", {
+//         headers : {
+//             Authorization : `Bearer ${accessToken.access_token}`
+//         }
+//     })
+//     .then((res) => res.json())
+//     .catch((err) => console.log(err))
+
+//     console.log(useremailis)
+    
+//     res.send(`Hello ..! ${user.name}, You Successfully Sign in with Github`)
+// })
 
 
-// app.get('/auth/google',
-//   passport.authenticate('google', { scope: ['profile'] }));
+//////////// Google O-Auth /////////////
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
+const passport = require("passport")
 
-// app.get('/auth/google/callback', 
-//   passport.authenticate('google', { failureRedirect: '/login' }),
-//   function(req, res) {
-//     // Successful authentication, redirect home.
-//     res.redirect('/');
-//   });
+passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: "http://localhost:8090/auth/google/callback"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    // User.findOrCreate({ googleId: profile.id }, function (err, user) {
+    //   return cb(err, user);
+    // });
+    console.log(accessToken, refreshToken, profile)
+    return cb (`Hello ${profile._json.name} ..!, You Successfully Sign in with Google`)
+  }
+));
 
-  app.listen(8090,async()=>{
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login',session: false }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+
+//////////// Facebook O-Auth /////////////
+// passport.use(new FacebookStrategy({
+//     clientID: FACEBOOK_APP_ID,
+//     clientSecret: FACEBOOK_APP_SECRET,
+//     callbackURL: "http://localhost:5050/auth/facebook/callback"
+//   },
+//   function(accessToken, refreshToken, profile, cb) {
+//     User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+//       return cb(err, user);
+//     });
+//   }
+// ));
+
+
+// app.use(auth)
+// app.use("/blogs", blogRouter)
+
+
+
+app.listen(process.env.port, async()=>{
     try {
-      await connection
-      console.log("Connected to DB");
-    } catch (error) {
-      console.log(error);
+        await connection
+        // connection.disconnect
+        console.log("Connected to Mongo")
+    } catch (err) {
+        console.log("Not connected to Mongo")
+        console.log(err)
     }
-    console.log("Server is running");
-  })
+    console.log('Server is running')
+})

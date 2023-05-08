@@ -1,3 +1,47 @@
+<<<<<<< HEAD
+
+
+
+let logout=document.getElementById("logout");
+logout.addEventListener("click",()=>{
+  console.log("Log Out")
+  logoutUser()
+})
+
+function logoutUser(){
+    console.log("Working properly");
+					// let obj={
+					// 	email:email.value,
+					// 	password:password.value
+					// }
+                    // console.log(obj);
+					fetch("http://localhost:8090/user/logout")
+          // ,{
+					// 	method:"POST",
+					// 	headers:{
+					// 		"Content-type":"application/json"
+					// 	},
+					// 	body:JSON.stringify(obj)
+					// })
+					.then((res)=>res.json())
+					.then((res)=>{
+						if(res){
+							console.log("res",res)
+							if(res){
+                alert(res.msg);
+								// window.location.href="http://127.0.0.1:5500/Frontend/chat.html"
+							}
+							// alert(res.msg);
+							
+						}
+					})
+					.catch((err) => console.log("error",err));
+}
+
+
+
+
+=======
 const API = "http://localhost:8100/channel/channelData"
 
 // // fetch(API,{
@@ -59,6 +103,7 @@ function Display(data){
 const workData = document.getElementById("vikrant")
 let localData = JSON.parse(localStorage.getItem("workData"));
 console.log(localData);
+>>>>>>> c319acafa50d52c273fabc30ca7aa2dd9137c7ce
 
 let data = JSON.parse(sessionStorage.getItem("partial_user"))
 
@@ -155,39 +200,40 @@ socket.emit("user_channel", { username, channel });
 
   //LOGOUT
 
-  let logout = document.querySelector("#logout")
-  logout.addEventListener("click",()=>{
-    // Swal.fire(
-    //   'Logout Successfully',
-    //   'You clicked the button!',
-    //   'success'
-    // )
+  
+
+
+  // logout.addEventListener("click",()=>{
+  //   // Swal.fire(
+  //   //   'Logout Successfully',
+  //   //   'You clicked the button!',
+  //   //   'success'
+  //   // )
     
 
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "Do you want to sign out of your account?",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Your account has been logged out successfully',
-          showConfirmButton: true,
-          confirmButtonText: 'Yes'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            window.location.href = "./index.html"
-          }
-        })
-      }
-    })
+  //   Swal.fire({
+  //     title: 'Are you sure?',
+  //     text: "Do you want to sign out of your account?",
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonColor: '#3085d6',
+  //     cancelButtonColor: '#d33',
+  //     confirmButtonText: 'Yes'
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       Swal.fire({
+  //         position: 'center',
+  //         icon: 'success',
+  //         title: 'Your account has been logged out successfully',
+  //         showConfirmButton: true,
+  //         confirmButtonText: 'Yes'
+  //       }).then((result) => {
+  //         if (result.isConfirmed) {
+  //           window.location.href = "./index.html"
+  //         }
+  //       })
+  //     }
+  //   })
 
-  })
+  // })
 
-  

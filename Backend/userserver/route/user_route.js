@@ -28,7 +28,7 @@ userRouter.post("/register",async(req,res)=>{
       res.send({msg:error.message});
     }
   })
-  
+  let tokenN;
   userRouter.post("/login",async(req,res)=>{
     // console.log("Working");
     let {email,password}=req.body;
@@ -47,7 +47,9 @@ userRouter.post("/register",async(req,res)=>{
                 let refreshToken=jwt.sign({userName:user.name,userMobile:user.mobile},"refreshToken",{
                     expiresIn:'20m'
                 })
+               
                 res.cookie("token",token)
+                tokenN=token
                 res.cookie("refreshToken",refreshToken)
                 res.send({msg:"Login Successful"});
             }
@@ -62,8 +64,10 @@ userRouter.post("/register",async(req,res)=>{
   
   userRouter.get("/logout",async(req,res)=>{
     try {
-        let {token}=req.cookies;
-        redis.set("blacklist",token);
+      
+        // let {token}=req.cookies;
+        
+        redis.set("blacklist",tokenN);
         res.send({msg:"LogOut Successfull"});
 
     } catch (error) {
