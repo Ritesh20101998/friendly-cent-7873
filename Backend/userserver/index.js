@@ -8,9 +8,9 @@ const {channle_router}=require("./route/channel.route")
 const { userRouter } = require("./route/user_route")
 const cookieParser = require("cookie-parser")
 
-// =======
-const {channle_router}=require("../route/channel.route")
-const cookieParser = require("cookie-parser")
+// // =======
+// const {channle_router}=require("../route/channel.route")
+// const cookieParser = require("cookie-parser")
 // >>>>>>> c319acafa50d52c273fabc30ca7aa2dd9137c7ce:Backend/userserver/index.js
 
 require("dotenv").config()
