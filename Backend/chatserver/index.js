@@ -39,6 +39,7 @@ app.get("/chat", async (req, res) => {
 
 const botename = "Chatify"
 
+console.log("Chatify")
 
 io.on("connection", (socket) => {
 
@@ -46,7 +47,8 @@ io.on("connection", (socket) => {
 
         socket.join(chat)
         socket.emit("welcome", formateMessage(botename, "Welcome to Chatify"))
-
+        console.log("Welcome to Chatify social community")
+        
         //Broadcast to other channel
         socket.broadcast.to(chat).emit("message_all", formateMessage(botename, `${username} has join the chat`))
 

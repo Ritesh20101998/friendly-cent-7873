@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-
-
 let logout=document.getElementById("logout");
 logout.addEventListener("click",()=>{
   console.log("Log Out")
@@ -38,72 +34,42 @@ function logoutUser(){
 					.catch((err) => console.log("error",err));
 }
 
+// const API = "http://localhost:8100/channel/channelData";
+
+// let channelname=document.getElementById("chnlname")
+
+// fetch(API)
+// .then((request)=>{
+// 	return request.json()
+// })
+// .then((data)=>{
+// 	indata = data.data
+// 	console.log(indata)
+// 	Display(indata)
+// })
+// .catch((err)=>{
+// 	console.log(err)
+// })
 
 
+// function Display(data){
+// 	data.forEach((element) => {
+// 		let channel = document.createElement("p")
 
-=======
-const API = "http://localhost:8100/channel/channelData"
+// 		let name= document.createElement("name");
+// 		name.innerText=element.name
 
-// // fetch(API,{
-// // 						method:"GET",
-// // 						headers:{
-// // 							"Content-type":"application/json"
-// // 						},
-// // 						body:JSON.stringify(obj)
-                        
-// // 					})
-// // 					.then((res)=>
-// //                         res.json(),
-// //                         console.log(obj)
-// //                         // window.location.href = "./main.html"
-// //                     )
-                    
-// // 					.then((res)=>{
-                        
-                        
-// // 						if(res){
-// // 							alert(res.msg);
-                            
-// // 						}
-// //                         // window.location.href = "../main.html"
-                        
-// // 					})
-// // 					.catch((err) => console.log(err));
-
-let channelname=document.getElementById("chnlname")
-
-fetch(API)
-.then((request)=>{
-	return request.json()
-})
-.then((data)=>{
-	indata = data.data
-	console.log(indata)
-	Display(indata)
-})
-.catch((err)=>{
-	console.log(err)
-})
-
-
-function Display(data){
-	data.forEach((element) => {
-		let channel = document.createElement("p")
-
-		let name= document.createElement("name");
-		name.innerText=element.name
-
-		channel.append(name)
-		channelname.append(channel)
+// 		channel.append(name)
+// 		channelname.append(channel)
 		
-	});
+// 	});
 
-}
+// }
 
 const workData = document.getElementById("vikrant")
 let localData = JSON.parse(localStorage.getItem("workData"));
 console.log(localData);
->>>>>>> c319acafa50d52c273fabc30ca7aa2dd9137c7ce
+
 
 let data = JSON.parse(sessionStorage.getItem("partial_user"))
 
