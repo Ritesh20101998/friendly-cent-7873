@@ -1,10 +1,10 @@
 let express=require("express");
-const { UserModel } = require("../model/user_model");
+const UserModel = require("../model/usermodel");
 let userRouter=express.Router();
 let bcrypt=require("bcrypt");
 let jwt=require("jsonwebtoken")
-let Redis=require("ioredis")
-let redis=new Redis();
+// let Redis=require("ioredis")
+// let ioredis=new Redis();
 
 
 userRouter.get("/",(req,res)=>{
@@ -13,23 +13,28 @@ userRouter.get("/",(req,res)=>{
 
 userRouter.post("/register",async(req,res)=>{
     let {name,email,mobile,password}=req.body;
-    try {
-      let user=await UserModel.findOne({email})
-      if(user){
-        return res.status(400).send({msg:"User is already present"})
+    try {      if (!name || !email || !password || !mobile) {
+        return res.status(400).json({ message: 'Please fill in all fields' });
       }
-      bcrypt.hash(password,4,async function(err,hash){
-        let user = new UserModel({name,email,mobile,password:hash});
-        await user.save();
-        res.status(200).send({msg:"Registration Successfull"})
+      // let user=await UserModel.findOne({email})
+      // if(user){
+      //   return res.status(400).send({msg:"User is already present"})
+      // }
+        bcrypt.hash(password,4,async function(err,hash){
+          let User = new UserModel({name,email,mobile,password:hash});
+          await User.save();
+          res.status(200).send({msg:"Registration Successfully Done..."})
       })
       
     } catch (error) {
       res.send({msg:error.message});
     }
-  })
-  let tokenN;
-  userRouter.post("/login",async(req,res)=>{
+})
+
+  
+let tokenN;
+  
+userRouter.post("/login",async(req,res)=>{
     // console.log("Working");
     let {email,password}=req.body;
     try {
@@ -51,7 +56,7 @@ userRouter.post("/register",async(req,res)=>{
                 res.cookie("token",token)
                 tokenN=token
                 res.cookie("refreshToken",refreshToken)
-                res.send({msg:"Login Successful"});
+                res.send({msg:"Login Successful",token, refreshToken});
             }
             else{
                 res.status(400).send({msg:"Wrong credential, Login Failed"});
@@ -60,9 +65,9 @@ userRouter.post("/register",async(req,res)=>{
     } catch (error) {
       res.send({msg:error.message})
     }
-  })
+})
   
-  userRouter.get("/logout",async(req,res)=>{
+userRouter.get("/logout",async(req,res)=>{
     try {
       
         // let {token}=req.cookies;

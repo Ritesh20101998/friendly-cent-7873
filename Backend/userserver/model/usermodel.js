@@ -9,4 +9,4 @@ let userSchema=mongoose.Schema({
 
 let UserModel=mongoose.model("user",userSchema);
 
-module.exports={UserModel}
+module.exports=UserModel
