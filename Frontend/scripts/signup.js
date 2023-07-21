@@ -16,7 +16,7 @@ function registerUser(){
 						password:password.value
 					}
 					// console.log(obj);
-					fetch("http://localhost:8090/user/register",{
+					fetch("http://localhost:8080/user/register",{
 						method:"POST",
 						headers:{
 							"Content-type":"application/json"
@@ -25,9 +25,10 @@ function registerUser(){
 					})
 					.then((res)=>res.json())
 					.then((res)=>{
-						// console.log(res);
+						console.log(res);
 						if(res){
 							alert(res.msg);
+							window.location.href="./main.html";
 						}
 					})
 					.catch((err) => console.log(err));

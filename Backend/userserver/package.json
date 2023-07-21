@@ -173,6 +173,7 @@
     "whatwg-url": "^11.0.0",
     "wide-align": "^1.1.5",
     "wrappy": "^1.0.2",
+    "ws": "^8.13.0",
     "yallist": "^4.0.0"
   },
   "scripts": {
