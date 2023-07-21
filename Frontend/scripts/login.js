@@ -27,11 +27,10 @@ function loginUser(){
 					.then((res)=>{
 						if(res){
 							console.log(res.msg)
+							alert(res.msg);
 							if(res.msg=="Login Successful"){
 								window.location.href="http://127.0.0.1:5500/Frontend/chat.html"
 							}
-							alert(res.msg);
-							
 						}
 					})
 					.catch((err) => console.log(err));
