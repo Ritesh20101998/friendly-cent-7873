@@ -9,3 +9,9 @@ const chatSchema = mongoose.Schema({
 const ChatModel = mongoose.model("chat",chatSchema)
 
 module.exports = {ChatModel}
+
+
+
+
+
+
